@@ -1,0 +1,70 @@
+project:
+  name: "MLOps Production Pipeline"
+  version: "1.0.0"
+  description: "End-to-end MLOps pipeline for production ML systems"
+
+data:
+  raw_data_path: "data/raw/"
+  processed_data_path: "data/processed/"
+  feature_store_path: "data/features/"
+  data_validation:
+    schema_path: "configs/data_schema.yaml"
+    drift_threshold: 0.1
+
+model:
+  name: "production_model"
+  type: "classification"  # or regression
+  target_column: "target"
+  feature_columns: []
+  
+  training:
+    test_size: 0.2
+    random_state: 42
+    cross_validation: 5
+    
+  hyperparameters:
+    max_depth: 10
+    n_estimators: 100
+    learning_rate: 0.1
+
+mlflow:
+  tracking_uri: "http://localhost:5000"
+  experiment_name: "production_pipeline"
+  model_registry_name: "production_model"
+
+monitoring:
+  model_performance:
+    metrics: ["accuracy", "precision", "recall", "f1"]
+    threshold: 0.85
+  
+  data_drift:
+    reference_data_path: "data/reference/"
+    drift_detection_method: "ks_test"
+    
+  alerts:
+    email: "admin@company.com"
+    slack_webhook: "https://hooks.slack.com/your-webhook"
+
+deployment:
+  environment: "production"  # development, staging, production
+  
+  api:
+    host: "0.0.0.0"
+    port: 8000
+    workers: 4
+    
+  docker:
+    image_name: "mlops-pipeline"
+    tag: "latest"
+    
+  kubernetes:
+    namespace: "mlops"
+    replicas: 3
+    resources:
+      cpu: "500m"
+      memory: "1Gi"
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file_path: "logs/app.log"

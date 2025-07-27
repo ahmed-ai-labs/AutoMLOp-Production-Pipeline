@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mlops
+  labels:
+    name: mlops
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mlops-config
+  namespace: mlops
+data:
+  config.yaml: |
+    project:
+      name: "MLOps Production Pipeline"
+      version: "1.0.0"
+      description: "End-to-end MLOps pipeline for production ML systems"
+    
+    model:
+      name: "production_model"
+      type: "classification"
+      
+    mlflow:
+      tracking_uri: "http://mlflow-service:5000"
+      experiment_name: "production_pipeline"
+      
+    deployment:
+      environment: "production"
+      api:
+        host: "0.0.0.0"
+        port: 8000
+        workers: 4
