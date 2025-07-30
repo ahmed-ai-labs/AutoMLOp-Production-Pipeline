@@ -2,9 +2,15 @@
 
 A comprehensive MLOps (Machine Learning Operations) production pipeline that provides end-to-end machine learning lifecycle management including data processing, model training, deployment, monitoring, and CI/CD.
 
+# 🛒 Supermarket Sales Revenue Prediction Project
+
+This project aims to predict whether a given transaction will result in high or low revenue for a supermarket. It uses features such as customer demographics, unit price, quantity, discounts, taxes, customer ratings, product category, and city information to make accurate predictions. The goal is to help supermarket managers understand the potential revenue impact of each sale in real-time.
+
+The model learns from past transaction data and provides instant predictions for new inputs. It supports performance monitoring and drift detection to ensure consistent model behavior over time. This solution is ideal for businesses in the retail and supermarket industry seeking better revenue forecasting and smarter decision-making based on customer behavior.
 ## 🏗️ Architecture
 
 ```
+
 ├── src/                    # Source code
 │   ├── api/               # FastAPI application
 │   ├── data/              # Data processing modules
@@ -89,7 +95,8 @@ curl http://localhost:8000/health
 # Make a prediction
 curl -X POST "http://localhost:8000/predict" -H "Content-Type: application/json" -d "{\"features\": [1,2,3,4,5,6,7,8,9,10]}"
 ```
-
+5 **Run streamlit_app.py**.
+``` streamlit run streamlit_app.py
 ### Docker Deployment
 
 1. **Build the container:**
